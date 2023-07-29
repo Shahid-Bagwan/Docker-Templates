@@ -36,7 +36,7 @@ The `Dockerfile.angular` is used to build an image for the Angular application. 
 FROM node:14-alpine as angular
 
 # Set the working directory for the Angular app
-WORKDIR /app
+WORKDIR ./app
 
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
@@ -54,7 +54,7 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copy the Angular build files from the previous stage to Nginx's default directory
-COPY --from=angular /app/dist /usr/share/nginx/html
+COPY --from=angular ./app/dist ./nginx/html
 
 # Expose the port on which Nginx will run (80 by default)
 EXPOSE 80
@@ -72,7 +72,7 @@ The `Dockerfile.django` is used to build an image for the Django application. It
 FROM python:3.9-alpine
 
 # Set the working directory for the Django app
-WORKDIR /app
+WORKDIR ./app
 
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
@@ -102,7 +102,7 @@ services:
     ports:
       - 4200:80
     volumes:
-      - ./frontend:/app
+      - ./frontend:./app
 
   backend:
     build:
@@ -111,7 +111,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./backend:/app
+      - ./backend:./app
 ```
 
 ## Usage
@@ -122,17 +122,19 @@ services:
 
 3. Place your Django application source files inside the `backend` directory.
 
-4. Modify the `Dockerfile.angular` and `Dockerfile.django` if necessary to meet your application's specific requirements.
+4. Remove the name of the language. just keep : Dockerfile
 
-5. Run the following command to build and start the containers:
+5. Modify the `Dockerfile.angular` and `Dockerfile.django` if necessary to meet your application's specific requirements.
+
+6. Run the following command to build and start the containers:
 
    ```
    docker-compose up -d
    ```
 
-6. Access your Angular application in the browser at `http://localhost:4200`.
+7. Access your Angular application in the browser at `http://localhost:4200`.
 
-7. Access your Django application in the browser at `http://localhost:8000`.
+8. Access your Django application in the browser at `http://localhost:8000`.
 
 ## Customization
 

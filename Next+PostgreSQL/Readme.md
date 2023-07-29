@@ -32,7 +32,7 @@ The `Dockerfile.nextjs` is used to build an image for the Next.js application. I
 FROM node:14-alpine
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR ./app
 
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
@@ -84,7 +84,7 @@ The `docker-compose.yml` file defines two services: `nextjs-app` and `postgres-d
 - `nextjs-app` service:
   - We specify the build context and the Dockerfile to build the Next.js application image.
   - The service will be accessible from the host at port 3000, as we are mapping port 3000 of the container to port 3000 of the host.
-  - We use a volume to map the host's `nextjs-app` directory to the container's `/usr/src/app` directory, allowing hot-reloading of changes during development.
+  - We use a volume to map the host's `nextjs-app` directory to the container's `./app` directory, allowing hot-reloading of changes during development.
 
 - `postgres-db` service:
   - We use the official PostgreSQL image from Docker Hub.
@@ -102,7 +102,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./nextjs-app:/usr/src/app
+      - ./nextjs-app:./app
 
   postgres-db:
     build:
@@ -124,7 +124,9 @@ services:
 
 3. Modify the `Dockerfile.nextjs` and `Dockerfile.postgres` if necessary to meet your application's specific requirements.
 
-4. Run the following command to build and start the containers:
+4. Remove the name of the language from dockerfile. just keep : Dockerfile.
+
+5. Run the following command to build and start the containers:
 
    ```bash
    docker-compose up -d
@@ -132,9 +134,9 @@ services:
 
    This will build the Next.js application image and the PostgreSQL image and run both containers in the background.
 
-5. Access your Next.js application in the browser at `http://localhost:3000`.
+6. Access your Next.js application in the browser at `http://localhost:3000`.
 
-6. Your PostgreSQL database is accessible on the default PostgreSQL port (5432). To interact with the database, you can use a PostgreSQL client or connect it to your application using the configured environment variables.
+7. Your PostgreSQL database is accessible on the default PostgreSQL port (5432). To interact with the database, you can use a PostgreSQL client or connect it to your application using the configured environment variables.
 
 ## Customization
 

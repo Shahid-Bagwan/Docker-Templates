@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Copy the jQuery files to Nginx's default directory
-COPY ./jquery-files/ /usr/share/nginx/html
+COPY ./jquery-files/ ./nginx/html
 
 # Expose the port on which Nginx will run (80 by default)
 EXPOSE 80

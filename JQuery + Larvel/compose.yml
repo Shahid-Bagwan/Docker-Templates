@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./frontend:/usr/share/nginx/html
+      - ./frontend:./nginx/html
 
   backend:
     build:
@@ -17,4 +17,4 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ./backend:/var/www
+      - ./backend:./var/www

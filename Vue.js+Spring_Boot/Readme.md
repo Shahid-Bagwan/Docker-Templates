@@ -36,7 +36,7 @@ The `Dockerfile.vue` is used to build an image for the Vue.js application. It us
 FROM node:14-alpine as vue
 
 # Set the working directory for the Vue.js app
-WORKDIR /usr/src/app
+WORKDIR ./app
 
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
@@ -54,7 +54,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy the Vue.js build files from the previous stage to Nginx's default directory
-COPY --from=vue /usr/src/app/dist /usr/share/nginx/html
+COPY --from=vue ./app/dist ./nginx/html
 
 # Expose the port on which Nginx will run (80 by default)
 EXPOSE 80
@@ -72,7 +72,7 @@ The `Dockerfile.spring` is used to build an image for the Spring Boot applicatio
 FROM openjdk:14-jdk-alpine
 
 # Set the working directory for the Spring Boot app
-WORKDIR /app
+WORKDIR ./app
 
 # Copy the compiled JAR file to the container
 COPY target/app.jar app.jar
@@ -99,7 +99,7 @@ services:
     ports:
       - 8081:80
     volumes:
-      - ./frontend:/usr/src/app
+      - ./frontend:./app
 
   backend:
     build:
@@ -108,7 +108,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./backend:/app
+      - ./backend:./app
 ```
 
 ## Usage
@@ -119,17 +119,19 @@ services:
 
 3. Place your Spring Boot application's compiled JAR file inside the `backend` directory and name it `app.jar`.
 
-4. Modify the `Dockerfile.vue` and `Dockerfile.spring` if necessary to meet your application's specific requirements.
+4. Remove the name of the language from dockerfile. just keep : Dockerfile.
 
-5. Run the following command to build and start the containers:
+5. Modify the `Dockerfile.vue` and `Dockerfile.spring` if necessary to meet your application's specific requirements.
+
+6. Run the following command to build and start the containers:
 
    ```
    docker-compose up -d
    ```
 
-6. Access your Vue.js application in the browser at `http://localhost:8081`.
+7. Access your Vue.js application in the browser at `http://localhost:8081`.
 
-7. Access your Spring Boot application at `http://localhost:8080`.
+8. Access your Spring Boot application at `http://localhost:8080`.
 
 ## Customization
 

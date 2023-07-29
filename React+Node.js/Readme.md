@@ -36,7 +36,7 @@ The `Dockerfile.react` is used to build an image for the React application. It u
 FROM node:14-alpine as react
 
 # Set the working directory for the React app
-WORKDIR /usr/src/app
+WORKDIR ./app
 
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
@@ -54,10 +54,10 @@ RUN npm run build
 FROM node:14-alpine
 
 # Set the working directory for the Node.js app
-WORKDIR /usr/src/app
+WORKDIR ./app
 
 # Copy built React files from the previous stage to the Node.js container
-COPY --from=react /usr/src/app/build ./build
+COPY --from=react ./app/build ./build
 
 # Install Node.js production dependencies only
 COPY package*.json ./
@@ -76,7 +76,7 @@ The `Dockerfile.node` is used to build an image for the Node.js application. It 
 FROM node:14-alpine
 
 # Set the working directory for the Node.js app
-WORKDIR /usr/src/app
+WORKDIR ./app
 
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
@@ -106,7 +106,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./frontend:/usr/src/app
+      - ./frontend:./app
 
   backend:
     build:
@@ -115,7 +115,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./backend:/usr/src/app
+      - ./backend:./app
 ```
 
 ## Usage
@@ -126,17 +126,19 @@ services:
 
 3. Place your Node.js application source files inside the `backend` directory.
 
-4. Modify the `Dockerfile.react` and `Dockerfile.node` if necessary to meet your application's specific requirements.
+4. Remove the name of the language from dockerfile. just keep : Dockerfile.
 
-5. Run the following command to build and start the containers:
+5. Modify the `Dockerfile.react` and `Dockerfile.node` if necessary to meet your application's specific requirements.
+
+6. Run the following command to build and start the containers:
 
    ```
    docker-compose up -d
    ```
 
-6. Access your React application in the browser at `http://localhost:3000`.
+7. Access your React application in the browser at `http://localhost:3000`.
 
-7. Access your Node.js application in the browser at `http://localhost:8080`.
+8. Access your Node.js application in the browser at `http://localhost:8080`.
 
 ## Customization
 

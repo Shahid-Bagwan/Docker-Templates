@@ -36,7 +36,7 @@ The `Dockerfile.jquery` is used to build an image for the jQuery application. It
 FROM nginx:alpine
 
 # Copy the jQuery files to Nginx's default directory
-COPY ./jquery-files/ /usr/share/nginx/html
+COPY ./jquery-files/ ./nginx/html
 
 # Expose the port on which Nginx will run (80 by default)
 EXPOSE 80
@@ -54,7 +54,7 @@ The `Dockerfile.laravel` is used to build an image for the Laravel application. 
 FROM php:7.4-fpm
 
 # Set the working directory for the Laravel app
-WORKDIR /var/www
+WORKDIR ./var/www
 
 # Install PHP extensions and other dependencies
 RUN apt-get update && \
@@ -91,7 +91,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./frontend/jquery-files:/usr/share/nginx/html
+      - ./frontend/jquery-files:./nginx/html
 
   backend:
     build:
@@ -100,7 +100,7 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ./backend/laravel-files:/var/www
+      - ./backend/laravel-files:./var/www
 ```
 
 ## Usage
@@ -111,17 +111,19 @@ services:
 
 3. Place your Laravel application source files inside the `backend/laravel-files` directory.
 
-4. Modify the `Dockerfile.jquery` and `Dockerfile.laravel` if necessary to meet your application's specific requirements.
+4. Remove the name of the language from dockerfile. just keep : Dockerfile.
 
-5. Run the following command to build and start the containers:
+5. Modify the `Dockerfile.jquery` and `Dockerfile.laravel` if necessary to meet your application's specific requirements.
+
+6. Run the following command to build and start the containers:
 
    ```
    docker-compose up -d
    ```
 
-6. Access your jQuery application in the browser at `http://localhost:8080`.
+7. Access your jQuery application in the browser at `http://localhost:8080`.
 
-7. Access your Laravel application in the browser at `http://localhost:9000`.
+8. Access your Laravel application in the browser at `http://localhost:9000`.
 
 ## Customization
 

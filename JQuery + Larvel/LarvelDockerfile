@@ -2,7 +2,7 @@
 FROM php:7.4-fpm
 
 # Set the working directory for the Laravel app
-WORKDIR /var/www
+WORKDIR ./var/www
 
 # Install PHP extensions and other dependencies
 RUN apt-get update && \

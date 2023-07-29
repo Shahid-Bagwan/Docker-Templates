@@ -8,7 +8,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./nextjs-app:/usr/src/app
+      - ./nextjs-app:./app
 
   postgres-db:
     image: postgres:latest
