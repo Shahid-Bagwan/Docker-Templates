@@ -1,6 +1,5 @@
 # Docker File Templates for Web Development Frameworks
 
-![GitHub](https://img.shields.io/github/license/Shahid-Bagwan/Docker-Templates)
 ![GitHub stars](https://img.shields.io/github/stars/Shahid-Bagwan/Docker-Templates?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Shahid-Bagwan/Docker-Templates?style=social)
 
@@ -66,10 +65,6 @@ If you find this repository helpful, kindly consider starring it to show your su
 ## Author
 
 This repository is maintained by [Shahid-Bagwan](https://github.com/Shahid-Bagwan).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
