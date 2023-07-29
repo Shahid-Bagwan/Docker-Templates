@@ -1,0 +1,33 @@
+# Use the official Node.js image as the base image for React app
+FROM node:14-alpine as react
+
+# Set the working directory for the React app
+WORKDIR ./app
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install Node.js dependencies
+RUN npm install
+
+# Copy the rest of the app's source code to the container
+COPY . .
+
+# Build the React app for production
+RUN npm run build
+
+# Stage 2: Use Node.js image to run the React app
+FROM node:14-alpine
+
+# Set the working directory for the Node.js app
+WORKDIR ./app
+
+# Copy built React files from previous stage to the Node.js container
+COPY --from=react ./app/build ./build
+
+# Install Node.js production dependencies only
+COPY package*.json ./
+RUN npm install --production
+
+# Start the Node.js app
+CMD ["node", "index.js"]

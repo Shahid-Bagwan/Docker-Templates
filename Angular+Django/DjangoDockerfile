@@ -1,0 +1,17 @@
+# Use the official Python image as the base image for Django app
+FROM python:3.9-alpine
+
+# Set the working directory for the Django app
+WORKDIR /app
+
+# Copy the requirements.txt file to the container
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the app's source code to the container
+COPY . .
+
+# Start the Django app
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

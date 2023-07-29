@@ -1,0 +1,14 @@
+# Use the official OpenJDK image as the base image for Spring Boot app
+FROM openjdk:14-jdk-alpine
+
+# Set the working directory for the Spring Boot app
+WORKDIR /app
+
+# Copy the compiled JAR file to the container
+COPY target/app.jar app.jar
+
+# Expose the port on which Spring Boot will run (8080 by default)
+EXPOSE 8080
+
+# Start the Spring Boot app
+CMD ["java", "-jar", "app.jar"]

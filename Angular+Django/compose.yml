@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.angular
+    ports:
+      - 4200:80
+    volumes:
+      - ./frontend:/usr/src/app
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.django
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app

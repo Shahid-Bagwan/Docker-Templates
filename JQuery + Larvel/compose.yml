@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.jquery
+    ports:
+      - 8080:80
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.laravel
+    ports:
+      - 9000:9000
+    volumes:
+      - ./backend:/var/www

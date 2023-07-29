@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.vue
+    ports:
+      - 8081:80
+    volumes:
+      - ./frontend:/usr/src/app
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.spring
+    ports:
+      - 8080:8080
+    volumes:
+      - ./backend:/app

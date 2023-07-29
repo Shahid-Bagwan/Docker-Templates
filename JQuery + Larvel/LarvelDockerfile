@@ -1,0 +1,24 @@
+# Use the official PHP image as the base image for Laravel app
+FROM php:7.4-fpm
+
+# Set the working directory for the Laravel app
+WORKDIR /var/www
+
+# Install PHP extensions and other dependencies
+RUN apt-get update && \
+    apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip unzip && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd pdo pdo_mysql
+
+# Copy the Laravel files to the container
+COPY ./laravel-files/ .
+
+# Install Composer and run Laravel dependencies installation
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer install
+
+# Expose the port on which PHP-FPM will run (9000 by default)
+EXPOSE 9000
+
+# Start PHP-FPM when the container is launched
+CMD ["php-fpm"]

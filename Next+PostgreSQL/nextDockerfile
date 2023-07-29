@@ -1,0 +1,23 @@
+# Use the official Node.js image as the base image
+FROM node:14-alpine
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the app's source code to the container
+COPY . .
+
+# Build the Next.js app for production
+RUN npm run build
+
+# Set the environment variable to production
+ENV NODE_ENV=production
+
+# Start the Next.js server
+CMD ["npm", "start"]

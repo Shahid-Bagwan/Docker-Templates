@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  nextjs-app:
+    build:
+      context: ./nextjs-app
+      dockerfile: Dockerfile.nextjs
+    ports:
+      - 3000:3000
+    volumes:
+      - ./nextjs-app:/usr/src/app
+
+  postgres-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    ports:
+      - 5432:5432
