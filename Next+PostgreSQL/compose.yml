@@ -4,7 +4,7 @@ services:
   nextjs-app:
     build:
       context: ./nextjs-app
-      dockerfile: Dockerfile.nextjs
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
     volumes:

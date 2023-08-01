@@ -4,7 +4,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.vue
+      dockerfile: Dockerfile
     ports:
       - 8081:80
     volumes:
@@ -13,7 +13,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.spring
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
     volumes:

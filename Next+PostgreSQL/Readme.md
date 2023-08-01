@@ -118,11 +118,13 @@ services:
 
 ## Usage
 
+`` Make changes according to your project. otherwise error may occur ``
+
 1. Clone this repository to your local machine.
 
 2. Place your Next.js application source files inside the `nextjs-app` directory.
 
-3. Modify the `Dockerfile.nextjs` and `Dockerfile.postgres` if necessary to meet your application's specific requirements.
+3. Modify the `Dockerfile.nextjs` and `Dockerfile.postgres` (there is no file named .(language name) its just for refrence) if necessary to meet your application's specific requirements.
 
 4. Remove the name of the language from dockerfile. just keep : Dockerfile.
 

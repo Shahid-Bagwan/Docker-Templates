@@ -2,7 +2,7 @@
 FROM python:3.9-alpine
 
 # Set the working directory for the Django app
-WORKDIR ./app
+WORKDIR /app
 
 # Copy the requirements.txt file to the container
 COPY requirements.txt .

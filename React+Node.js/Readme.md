@@ -120,6 +120,8 @@ services:
 
 ## Usage
 
+`` Make changes according to your project. otherwise error may occur ``
+
 1. Clone this repository to your local machine.
 
 2. Place your React application source files inside the `frontend` directory.
@@ -128,7 +130,7 @@ services:
 
 4. Remove the name of the language from dockerfile. just keep : Dockerfile.
 
-5. Modify the `Dockerfile.react` and `Dockerfile.node` if necessary to meet your application's specific requirements.
+5. Modify the `Dockerfile.react` and `Dockerfile.node` (there is no file named .(language name) its just for refrence) if necessary to meet your application's specific requirements.
 
 6. Run the following command to build and start the containers:
 

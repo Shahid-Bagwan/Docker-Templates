@@ -4,7 +4,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.jquery
+      dockerfile: Dockerfile
     ports:
       - 8080:80
     volumes:
@@ -13,7 +13,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.laravel
+      dockerfile: Dockerfile
     ports:
       - 9000:9000
     volumes:

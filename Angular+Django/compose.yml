@@ -4,7 +4,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.angular
+      dockerfile: Dockerfile
     ports:
       - 4200:80
     volumes:
@@ -13,7 +13,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.django
+      dockerfile: Dockerfile
     ports:
       - 8000:8000
     volumes:
